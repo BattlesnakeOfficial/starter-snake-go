@@ -67,3 +67,7 @@ Or go directly via http://APP_NAME.herokuapp.com
 ```
 heroku logs --tail
 ```
+
+### Questions?
+
+[Email](mailto:battlesnake@sendwithus.com), [Twitter](http://twitter.com/send_with_us)
