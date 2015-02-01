@@ -35,8 +35,8 @@ func routeRequest(w http.ResponseWriter, r *http.Request) {
     }
 
     // Method not allowed
-    w.WriteHeader(http.StatusMethodNotAllowed)
-    fmt.Fprint(w, "405 Method Not Allowed")
+    w.WriteHeader(http.StatusNotFound)
+    fmt.Fprint(w, "404 Not Found")
 }
 
 func main() {
