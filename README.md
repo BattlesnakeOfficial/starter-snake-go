@@ -2,11 +2,13 @@
 
 A simple [BattleSnake AI](http://battlesnake.io) written in Go.
 
-To get started you'll need a working Go development environment. 
+To get started you'll need a working Go development environment.
 
 If you haven't setup a Go development environment before, read [how to get started with Go](https://golang.org/doc/install).
 
 You'll also need the [Godep](https://github.com/tools/godep) dependency management tool
+
+You can also [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ### Running the AI locally
 
