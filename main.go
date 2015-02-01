@@ -49,7 +49,7 @@ func main() {
     // http.HandleFunc("/move", handleMove)
     // http.HandleFunc("/end", handleEnd)
 
-    port := os.Getenv("POST")
+    port := os.Getenv("PORT")
     if len(port) == 0 {
         port = "9000"
     }
