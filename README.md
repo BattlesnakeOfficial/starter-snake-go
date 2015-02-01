@@ -8,7 +8,7 @@ If you haven't setup a Go development environment before, read [how to get start
 
 You'll also need the [Godep](https://github.com/tools/godep) dependency management tool
 
-You can also [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ### Running the AI locally
 
