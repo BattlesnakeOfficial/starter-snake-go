@@ -15,3 +15,16 @@ func handleStart(w http.ResponseWriter, r *http.Request) {
             "taunt": "battlesnake-go"
         }`)
 }
+
+func handleMove(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprint(w,
+        `{
+            "move": "down",
+            "taunt": "battlesnake-go!"
+        }`)
+}
+
+func handleEnd(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprint(w,
+        `{}`)
+}
