@@ -2,26 +2,23 @@
 
 A simple [BattleSnake AI](http://battlesnake.io) written in Go.
 
-Available at [http://battlesnake-go.herokuapp.com](http://battlesnake-go.herokuapp.com).
+Visit [battlesnake.io/readme](http://battlesnake.io/readme) for API documentation and instructions for running your AI.
 
 To get started, you'll need:
-  1. Setup your Go development environment ([guide](https://golang.org/doc/install)).
-  2. Install [Godep](https://github.com/tools/godep).
+  1. A working Go development environment ([guide](https://golang.org/doc/install)).
+  2. Experience [deploying Go apps to Heroku](https://devcenter.heroku.com/articles/getting-started-with-go#introduction)
+  3. Your Snake ID from http://www.battlesnake.io/team
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ### Running the AI locally
 
-1) Fork and clone this repo.
-```
-cd $GOPATH/github.com/sendwithus/battlesnake-go
-git clone git@github.com:sendwithus/battlesnake-go.git
-cd battlesnake-go
-```
+1) [Fork this repo](https://github.com/sendwithus/battlesnake-go/fork).
 
-2) Load dependencies.
+2) Clone repo to your development environment:
 ```
-godep restore
+git clone git@github.com:USERNAME/battlesnake-go.git $GOPATH/github.com/USERNAME/battlesnake-go
+cd $GOPATH/github.com/USERNAME/battlesnake-go
 ```
 
 3) Compile the battlesnake-go server.
@@ -30,31 +27,35 @@ go build
 ```
 This will create a `battlesnake-go` executable.
 
-4) Run the server.
+4) Set your snake ID as an environment variable.
+```
+export SNAKE_ID=ABCDEF1234
+```
+This will create a `battlesnake-go` executable.
+
+5) Run the server.
 ```
 ./battlesnake-go
 ```
 
-5) Test the client in your browser: [http://127.0.0.1:9000](http://127.0.0.1:9000)
+6) Test the client in your browser: [http://127.0.0.1:9000](http://127.0.0.1:9000)
 
 
 ### Deploying to Heroku
 
-1) Save godep dependencies:
-```
-godep save
-git add .
-git commit -m "save godependencies"
-```
-
-2) Create a new Go Heroku app using Go buildpack.
+1) Create a new Go Heroku app using Go buildpack.
 ```
 heroku create [APP_NAME] --buildpack https://github.com/kr/heroku-buildpack-go
 ```
 
-3) Push code to Heroku servers.
+2) Push code to Heroku servers.
 ```
 git push heroku master
+```
+
+3) Set the SNAKE_ID environment variable in your Heroku app.
+```
+heroku config:set SNAKE_ID=ABCDEF1234
 ```
 
 4) Open Heroku app in browser.
