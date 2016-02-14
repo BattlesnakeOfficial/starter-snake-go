@@ -31,7 +31,7 @@ This will create a `battlesnake-go` executable.
 ```
 export SNAKE_ID=ABCDEF1234
 ```
-This will create a `battlesnake-go` executable.
+This will allow your snake to locate itself during the game.
 
 5) Run the server.
 ```
