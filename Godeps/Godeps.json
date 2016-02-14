@@ -1,5 +1,5 @@
 {
 	"ImportPath": "github.com/sendwithus/battlesnake-go",
-	"GoVersion": "go1.3.3",
+	"GoVersion": "go1.5",
 	"Deps": []
 }
