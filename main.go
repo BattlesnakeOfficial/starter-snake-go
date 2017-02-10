@@ -6,18 +6,12 @@ import (
 	"os"
 )
 
-var SNAKE_ID string
-
 func main() {
-	http.HandleFunc("/", handleInfo)
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/", fs)
+
 	http.HandleFunc("/start", handleStart)
 	http.HandleFunc("/move", handleMove)
-	http.HandleFunc("/end", handleEnd)
-
-	SNAKE_ID = os.Getenv("SNAKE_ID")
-	if SNAKE_ID == "" {
-		log.Fatal("SNAKE_ID environment variable must be set.")
-	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
