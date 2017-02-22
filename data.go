@@ -72,12 +72,3 @@ func (point *Point) UnmarshalJSON(data []byte) error {
 	*point = Point{X: coords[0], Y: coords[1]}
 	return nil
 }
-
-// Allows decoding a string or number identifier in JSON
-// by removing any surrounding quotes and storing in a string
-type Identifier string
-
-func (t *Identifier) UnmarshalJSON(data []byte) error {
-	*t = Identifier(strings.Trim(string(data), `"`))
-	return nil
-}
