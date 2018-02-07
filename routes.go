@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"math/rand"
 	"net/http"
@@ -51,17 +50,4 @@ func Move(res http.ResponseWriter, req *http.Request) {
 	respond(res, MoveResponse{
 		Move: directions[r.Intn(4)],
 	})
-}
-
-func respond(res http.ResponseWriter, obj interface{}) {
-	res.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(res).Encode(obj)
-	res.Write([]byte("\n"))
-}
-
-func dump(obj interface{}) {
-	data, err := json.MarshalIndent(obj, "", "  ")
-	if err == nil {
-		log.Printf(string(data))
-	}
 }
