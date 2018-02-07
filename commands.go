@@ -2,49 +2,42 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"time"
 )
 
-func respond(res http.ResponseWriter, obj interface{}) {
-	res.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(res).Encode(obj)
-}
+func Start(res http.ResponseWriter, req *http.Request) {
+	log.Print("START REQUEST")
 
-func handleStart(res http.ResponseWriter, req *http.Request) {
-	data, err := NewGameStartRequest(req)
+	data, err := NewStartRequest(req)
 	if err != nil {
-		respond(res, GameStartResponse{
-			Taunt:   toStringPointer("battlesnake-go!"),
-			Color:   "#00FF00",
-			Name:    fmt.Sprintf("%v (%vx%v)", data.GameId, data.Width, data.Height),
-			HeadUrl: toStringPointer(fmt.Sprintf("%v://%v/static/head.png")),
-		})
+		log.Printf("Bad start request: %v", err)
+		respond(res, StartResponse{})
 	}
+	dump(data)
 
-	scheme := "http"
-	if req.TLS != nil {
-		scheme = "https"
-	}
-	respond(res, GameStartResponse{
-		Taunt:   toStringPointer("battlesnake-go!"),
-		Color:   "#00FF00",
-		Name:    fmt.Sprintf("%v (%vx%v)", data.GameId, data.Width, data.Height),
-		HeadUrl: toStringPointer(fmt.Sprintf("%v://%v/static/head.png", scheme, req.Host)),
+	respond(res, StartResponse{
+		Taunt: "battlesnake-go!",
+		Color: "#00FF00",
+		Name:  "battlesnake-go",
 	})
 }
 
-func handleMove(res http.ResponseWriter, req *http.Request) {
+func Move(res http.ResponseWriter, req *http.Request) {
+	log.Printf("MOVE REQUEST")
+
 	data, err := NewMoveRequest(req)
+
 	if err != nil {
+		log.Printf("Bad move request: %v", err)
 		respond(res, MoveResponse{
-			Move:  "up",
-			Taunt: toStringPointer("can't parse this!"),
+			Move: "up",
 		})
 		return
 	}
+	dump(data)
 
 	directions := []string{
 		"up",
@@ -56,7 +49,19 @@ func handleMove(res http.ResponseWriter, req *http.Request) {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	respond(res, MoveResponse{
-		Move:  directions[r.Intn(4)],
-		Taunt: &data.You,
+		Move: directions[r.Intn(4)],
 	})
+}
+
+func respond(res http.ResponseWriter, obj interface{}) {
+	res.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(res).Encode(obj)
+	res.Write([]byte("\n"))
+}
+
+func dump(obj interface{}) {
+	data, err := json.MarshalIndent(obj, "", "  ")
+	if err == nil {
+		log.Printf(string(data))
+	}
 }

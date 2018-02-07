@@ -2,50 +2,37 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"net/http"
-	"strings"
 )
 
-type GameStartRequest struct {
-	GameId string `json:"game_id"`
-	Height int    `json:"height"`
-	Width  int    `json:"width"`
+type StartRequest struct {
+	GameID int `json:"game_id"`
 }
 
-type GameStartResponse struct {
-	Color   string  `json:"color"`
-	HeadUrl *string `json:"head_url,omitempty"`
-	Name    string  `json:"name"`
-	Taunt   *string `json:"taunt,omitempty"`
+func NewStartRequest(req *http.Request) (*StartRequest, error) {
+	decoded := StartRequest{}
+	err := json.NewDecoder(req.Body).Decode(&decoded)
+	return &decoded, err
+}
+
+type StartResponse struct {
+	Color          string   `json:"color,omitempty"`
+	Name           string   `json:"name,omitempty"`
+	HeadURL        string   `json:"head_url,omitempty"`
+	Taunt          string   `json:"taunt,omitempty"`
+	HeadType       HeadType `json:"head_type,omitempty"`
+	TailType       TailType `json:"tail_type,omitempty"`
+	SecondaryColor string   `json:"secondary_color,omitempty"`
 }
 
 type MoveRequest struct {
-	Food   []Point `json:"food"`
-	GameId string  `json:"game_id"`
-	Height int     `json:"height"`
-	Width  int     `json:"width"`
-	Turn   int     `json:"turn"`
-	Snakes []Snake `json:"snakes"`
-	You    string  `json:"you"`
-}
-
-type MoveResponse struct {
-	Move  string  `json:"move"`
-	Taunt *string `json:"taunt,omitempty"`
-}
-
-type Point struct {
-	X int `json:"x"`
-	Y int `json:"y"`
-}
-
-type Snake struct {
-	Coords       []Point `json:"coords"`
-	HealthPoints int     `json:"health_points"`
-	Id           string  `json:"id"`
-	Name         string  `json:"name"`
-	Taunt        string  `json:"taunt"`
+	Food   PointList `json:"food"`
+	Height int       `json:"height"`
+	ID     int       `json:"id"`
+	Snakes SnakeList `json:"snakes"`
+	Turn   int       `json:"turn"`
+	Width  int       `json:"width"`
+	You    Snake     `json:"you"`
 }
 
 func NewMoveRequest(req *http.Request) (*MoveRequest, error) {
@@ -54,21 +41,79 @@ func NewMoveRequest(req *http.Request) (*MoveRequest, error) {
 	return &decoded, err
 }
 
-func NewGameStartRequest(req *http.Request) (*GameStartRequest, error) {
-	decoded := GameStartRequest{}
-	err := json.NewDecoder(req.Body).Decode(&decoded)
-	return &decoded, err
+type MoveResponse struct {
+	Move string `json:"move"`
 }
 
-func (snake Snake) Head() Point { return snake.Coords[0] }
+type Snake struct {
+	Body   PointList `json:"body"`
+	Health int       `json:"health"`
+	ID     string    `json:"id"`
+	Length int       `json:"length"`
+	Name   string    `json:"name"`
+	Taunt  string    `json:"taunt"`
+}
 
-// Decode [number, number] JSON array into a Point
-func (point *Point) UnmarshalJSON(data []byte) error {
-	var coords []int
-	json.Unmarshal(data, &coords)
-	if len(coords) != 2 {
-		return errors.New("Bad set of coordinates: " + string(data))
+func (snake Snake) Head() Point { return snake.Body[0] }
+
+type Point struct {
+	X int `json:"x"`
+	Y int `json:"y"`
+}
+
+type HeadType string
+
+const (
+	HEAD_BENDR     HeadType = "bendr"
+	HEAD_DEAD               = "dead"
+	HEAD_FANG               = "fang"
+	HEAD_PIXEL              = "pixel"
+	HEAD_REGULAR            = "regular"
+	HEAD_SAFE               = "safe"
+	HEAD_SAND_WORM          = "sand-worm"
+	HEAD_SHADES             = "shades"
+	HEAD_SMILE              = "smile"
+	HEAD_TONGUE             = "tongue"
+)
+
+type TailType string
+
+const (
+	TAIL_BLOCK_BUM    TailType = "block-bum"
+	TAIL_CURLED                = "curled"
+	TAIL_FAT_RATTLE            = "fat-rattle"
+	TAIL_FRECKLED              = "freckled"
+	TAIL_PIXEL                 = "pixel"
+	TAIL_REGULAR               = "regular"
+	TAIL_ROUND_BUM             = "round-bum"
+	TAIL_SKINNY                = "skinny"
+	TAIL_SMALL_RATTLE          = "small-rattle"
+)
+
+// Parses List<Point> into []Point
+type PointList []Point
+
+func (list *PointList) UnmarshalJSON(data []byte) error {
+	var obj struct {
+		Data []Point `json:"data"`
 	}
-	*point = Point{X: coords[0], Y: coords[1]}
+	if err := json.Unmarshal(data, &obj); err != nil {
+		return err
+	}
+	*list = obj.Data
+	return nil
+}
+
+// Parses List<Snake> into []Snake
+type SnakeList []Snake
+
+func (list *SnakeList) UnmarshalJSON(data []byte) error {
+	var obj struct {
+		Data []Snake `json:"data"`
+	}
+	if err := json.Unmarshal(data, &obj); err != nil {
+		return err
+	}
+	*list = obj.Data
 	return nil
 }
