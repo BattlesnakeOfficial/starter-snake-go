@@ -17,9 +17,12 @@ func Start(res http.ResponseWriter, req *http.Request) {
 	dump(data)
 
 	respond(res, StartResponse{
-		Taunt: "battlesnake-go!",
-		Color: "#00FF00",
-		Name:  "battlesnake-go",
+		Taunt:          "battlesnake-go!",
+		Color:          "#75CEDD",
+		Name:           "battlesnake-go",
+		HeadType:       HEAD_PIXEL,
+		TailType:       TAIL_ROUND_BUM,
+		SecondaryColor: "#F7D3A2",
 	})
 }
 
