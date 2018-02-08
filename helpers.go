@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -21,21 +20,31 @@ func dump(obj interface{}) {
 	}
 }
 
-const LogFormat = `"%s %d %d" %f`
+const LogFormat = `"%s %s %s %d %d" %f`
 
 func LoggingHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+		loggingWriter := &LoggingResponseWriter{res, http.StatusOK}
 
 		startTime := time.Now()
-		next.ServeHTTP(res, req)
+		next.ServeHTTP(loggingWriter, req)
 		elapsedTime := time.Now().Sub(startTime)
-
-		requestLine := fmt.Sprintf("%s %s %s", req.Method, req.RequestURI, req.Proto)
 
 		log.Printf(
 			LogFormat,
-			requestLine, http.StatusOK, 0, elapsedTime.Seconds(),
+			req.Method, req.RequestURI, req.Proto,
+			loggingWriter.statusCode, 0, elapsedTime.Seconds(),
 		)
 
 	})
+}
+
+type LoggingResponseWriter struct {
+	http.ResponseWriter
+	statusCode int
+}
+
+func (res *LoggingResponseWriter) WriteHeader(code int) {
+	res.statusCode = code
+	res.ResponseWriter.WriteHeader(code)
 }
