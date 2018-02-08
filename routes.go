@@ -13,7 +13,6 @@ func Start(res http.ResponseWriter, req *http.Request) {
 	data, err := NewStartRequest(req)
 	if err != nil {
 		log.Printf("Bad start request: %v", err)
-		respond(res, StartResponse{})
 	}
 	dump(data)
 
@@ -31,10 +30,6 @@ func Move(res http.ResponseWriter, req *http.Request) {
 
 	if err != nil {
 		log.Printf("Bad move request: %v", err)
-		respond(res, MoveResponse{
-			Move: "up",
-		})
-		return
 	}
 	dump(data)
 
