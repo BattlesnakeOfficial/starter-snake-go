@@ -6,7 +6,7 @@ Visit [battlesnake.io/readme](http://battlesnake.io/readme) for API documentatio
 
 To get started, you'll need:
   1. A working Go development environment ([guide](https://golang.org/doc/install)).
-  2. Experience [deploying Go apps to Heroku](https://devcenter.heroku.com/articles/getting-started-with-go#introduction)
+  2. Read [Heroku's guide to deploying Go apps](https://devcenter.heroku.com/articles/getting-started-with-go#introduction)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
