@@ -18,6 +18,9 @@ func main() {
 		port = "9000"
 	}
 
+	// Add filename into logging messages
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+
 	log.Printf("Running server on port %s...\n", port)
 	http.ListenAndServe(":"+port, LoggingHandler(http.DefaultServeMux))
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -23,6 +24,8 @@ func dump(obj interface{}) {
 const LogFormat = `"%s %s %s %d %d" %f`
 
 func LoggingHandler(next http.Handler) http.Handler {
+	var logger = log.New(os.Stderr, "", log.LstdFlags)
+
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		loggingWriter := &LoggingResponseWriter{res, http.StatusOK}
 
@@ -30,7 +33,7 @@ func LoggingHandler(next http.Handler) http.Handler {
 		next.ServeHTTP(loggingWriter, req)
 		elapsedTime := time.Now().Sub(startTime)
 
-		log.Printf(
+		logger.Printf(
 			LogFormat,
 			req.Method, req.RequestURI, req.Proto,
 			loggingWriter.statusCode, 0, elapsedTime.Seconds(),
