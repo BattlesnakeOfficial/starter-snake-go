@@ -12,6 +12,7 @@ func main() {
 
 	http.HandleFunc("/start", Start)
 	http.HandleFunc("/move", Move)
+	http.HandleFunc("/end", End)
 
 	port := os.Getenv("PORT")
 	if port == "" {
