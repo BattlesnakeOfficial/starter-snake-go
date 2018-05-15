@@ -3,8 +3,8 @@ package main
 import (
 	"bytes"
 	"net/http"
-	"reflect"
 	"testing"
+	"github.com/stretchr/testify/assert"
 )
 
 var mockReq = `{
@@ -75,16 +75,13 @@ func createMockSnakeRequest() *SnakeRequest {
 	return &sr
 }
 
-func TestDecodeSnakeRequest(t *testing.T) {
+func TestNewSnakeRequest(t *testing.T) {
+	expected := &SnakeRequest{}
 	req := requestWithBody(mockReq)
-	result, err := DecodeSnakeRequest(req)
-
-	if err != nil {
-		t.Fatal(err)
+	
+	result, err := NewSnakeRequest(req)
+	if assert.NoError(t, err) {
+		expected = createMockSnakeRequest()
 	}
-	expected := createMockSnakeRequest()
-
-	if !reflect.DeepEqual(result, expected) {
-		t.Errorf("Expected:\n%#v\nGot:\n%#v", expected, result)
-	}
+	assert.Equal(t, result, expected)
 }
