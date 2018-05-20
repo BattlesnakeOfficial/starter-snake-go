@@ -43,7 +43,7 @@ type MoveResponse struct {
 	Move string `json:"move"`
 }
 
-func NewSnakeRequest(req *http.Request) (*SnakeRequest, error) {
+func DecodeSnakeRequest(req *http.Request) (*SnakeRequest, error) {
 	decoded := SnakeRequest{}
 	err := json.NewDecoder(req.Body).Decode(&decoded)
 	return &decoded, err

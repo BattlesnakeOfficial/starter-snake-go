@@ -75,11 +75,11 @@ func createMockSnakeRequest() *SnakeRequest {
 	return &sr
 }
 
-func TestNewSnakeRequest(t *testing.T) {
+func TestDecodeSnakeRequest(t *testing.T) {
 	expected := &SnakeRequest{}
 	req := requestWithBody(mockReq)
 	
-	result, err := NewSnakeRequest(req)
+	result, err := DecodeSnakeRequest(req)
 	if assert.NoError(t, err) {
 		expected = createMockSnakeRequest()
 	}

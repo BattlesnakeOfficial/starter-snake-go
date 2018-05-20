@@ -6,7 +6,7 @@ import (
 )
 
 func Start(res http.ResponseWriter, req *http.Request) {
-	data, err := NewSnakeRequest(req)
+	data, err := DecodeSnakeRequest(req)
 	if err != nil {
 		log.Printf("Bad start request: %v", err)
 	}
@@ -18,7 +18,7 @@ func Start(res http.ResponseWriter, req *http.Request) {
 }
 
 func Move(res http.ResponseWriter, req *http.Request) {
-	data, err := NewSnakeRequest(req)
+	data, err := DecodeSnakeRequest(req)
 	if err != nil {
 		log.Printf("Bad move request: %v", err)
 	}
