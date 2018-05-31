@@ -48,7 +48,7 @@ func requestWithBody(body string) *http.Request {
 	return req
 }
 
-func createMockSnakeRequest() *SnakeRequest {
+func createMockSnakeRequest() SnakeRequest {
 	c := Coord{
 		X: 1,
 		Y: 1,
@@ -72,14 +72,15 @@ func createMockSnakeRequest() *SnakeRequest {
 		Turn:  10,
 		You:   s,
 	}
-	return &sr
+	return sr
 }
 
 func TestDecodeSnakeRequest(t *testing.T) {
-	expected := &SnakeRequest{}
+	expected := SnakeRequest{}
 	req := requestWithBody(mockReq)
 	
-	result, err := DecodeSnakeRequest(req)
+	result := SnakeRequest{}
+	err := DecodeSnakeRequest(req, &result)
 	if assert.NoError(t, err) {
 		expected = createMockSnakeRequest()
 	}
