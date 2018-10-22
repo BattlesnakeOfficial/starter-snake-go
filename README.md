@@ -20,19 +20,21 @@ git clone git@github.com:USERNAME/battlesnake-go.git $GOPATH/github.com/USERNAME
 cd $GOPATH/github.com/USERNAME/battlesnake-go
 ```
 
-3) Compile the battlesnake-go server.
-```
-go build
-```
-This will create a `battlesnake-go` executable.
+3) Compile and run the server with:
 
-4) Run the server.
 ```
-./battlesnake-go
+Make run
 ```
 
-5) Test the client in your browser: [http://127.0.0.1:9000/start](http://127.0.0.1:9000/start)
+4) Test the client in your browser: [http://127.0.0.1:9000/start](http://127.0.0.1:9000/start)
 
+### Running tests locally
+
+```
+Make test
+```
+
+Note: if you're missing any packages, use `Make get`.
 
 ### Deploying to Heroku
 

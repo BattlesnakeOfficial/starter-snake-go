@@ -3,30 +3,32 @@ package main
 import (
 	"log"
 	"net/http"
+
+  "github.com/battlesnakeio/starter-snake-go/api"
 )
 
 func Start(res http.ResponseWriter, req *http.Request) {
-	decoded := SnakeRequest{}
-	err := DecodeSnakeRequest(req, &decoded)
+	decoded := api.SnakeRequest{}
+	err := api.DecodeSnakeRequest(req, &decoded)
 	if err != nil {
 		log.Printf("Bad start request: %v", err)
 	}
 	dump(decoded)
 
-	respond(res, StartResponse{
+	respond(res, api.StartResponse{
 		Color: "#75CEDD",
 	})
 }
 
 func Move(res http.ResponseWriter, req *http.Request) {
-	decoded := SnakeRequest{}
-	err := DecodeSnakeRequest(req, &decoded)
+	decoded := api.SnakeRequest{}
+	err := api.DecodeSnakeRequest(req, &decoded)
 	if err != nil {
 		log.Printf("Bad move request: %v", err)
 	}
 	dump(decoded)
 
-	respond(res, MoveResponse{
+	respond(res, api.MoveResponse{
 		Move: "down",
 	})
 }
