@@ -36,3 +36,7 @@ func Move(res http.ResponseWriter, req *http.Request) {
 func End(res http.ResponseWriter, req *http.Request) {
 	return
 }
+
+func Ping(res http.ResponseWriter, req *http.Request) {
+	return
+}
