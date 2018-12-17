@@ -4,8 +4,12 @@ import (
 	"log"
 	"net/http"
 
-  "github.com/battlesnakeio/starter-snake-go/api"
+	"github.com/battlesnakeio/starter-snake-go/api"
 )
+
+func Index(res http.ResponseWriter, req *http.Request) {
+	return
+}
 
 func Start(res http.ResponseWriter, req *http.Request) {
 	decoded := api.SnakeRequest{}

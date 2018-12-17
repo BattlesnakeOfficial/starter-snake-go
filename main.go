@@ -7,9 +7,7 @@ import (
 )
 
 func main() {
-	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/", fs)
-
+	http.HandleFunc("/", Index)
 	http.HandleFunc("/start", Start)
 	http.HandleFunc("/move", Move)
 	http.HandleFunc("/end", End)
