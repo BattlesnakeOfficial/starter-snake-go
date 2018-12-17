@@ -8,7 +8,10 @@ import (
 )
 
 func Index(res http.ResponseWriter, req *http.Request) {
-	return
+	respond(res, fmt.printf(
+		"Battlesnake documentation can be found at" +
+		"<a href=\"https://battlesnake.io/docs\">https://battlesnake.io/docs</a>."
+	))
 }
 
 func Start(res http.ResponseWriter, req *http.Request) {
