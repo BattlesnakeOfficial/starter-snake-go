@@ -10,7 +10,7 @@ import (
 func Index(res http.ResponseWriter, req *http.Request) {
 	respond(res, fmt.printf(
 		"Battlesnake documentation can be found at" +
-		"<a href=\"https://battlesnake.io/docs\">https://battlesnake.io/docs</a>."
+ 		"<a href=\"https://docs.battlesnake.io\">https://docs.battlesnake.io</a>."
 	))
 }
 
