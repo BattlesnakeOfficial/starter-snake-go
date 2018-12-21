@@ -4,8 +4,13 @@ import (
 	"log"
 	"net/http"
 
-  "github.com/battlesnakeio/starter-snake-go/api"
+	"github.com/battlesnakeio/starter-snake-go/api"
 )
+
+func Index(res http.ResponseWriter, req *http.Request) {
+	res.WriteHeader(http.StatusOK)
+	res.Write([]byte("Battlesnake documentation can be found at <a href=\"https://docs.battlesnake.io\">https://docs.battlesnake.io</a>."))
+}
 
 func Start(res http.ResponseWriter, req *http.Request) {
 	decoded := api.SnakeRequest{}
