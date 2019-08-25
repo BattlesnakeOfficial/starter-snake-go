@@ -1,10 +1,5 @@
-get:
-	@echo ">> Getting any missing dependencies.."
-	go get -t ./...
-.PHONY: get
-
 install:
-	go install github.com/battlesnakeio/starter-snake-go
+	go install
 .PHONY: install
 
 run: install
