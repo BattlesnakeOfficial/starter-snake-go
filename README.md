@@ -23,7 +23,7 @@ cd $GOPATH/github.com/USERNAME/battlesnake-go
 3) Compile and run the server with:
 
 ```
-Make run
+make run
 ```
 
 4) Test the client in your browser: [http://127.0.0.1:9000/start](http://127.0.0.1:9000/start)
@@ -31,7 +31,7 @@ Make run
 ### Running tests locally
 
 ```
-Make test
+make test
 ```
 
 Note: if you're missing any packages, use `Make get`.
