@@ -5,8 +5,9 @@ A simple [Battlesnake AI](http://battlesnake.io) written in Go.
 Visit [https://github.com/battlesnakeio/community/blob/master/starter-snakes.md](https://github.com/battlesnakeio/community/blob/master/starter-snakes.md) for API documentation and instructions for running your AI.
 
 To get started, you'll need:
-  1. A working Go development environment ([guide](https://golang.org/doc/install)).
-  2. Read [Heroku's guide to deploying Go apps](https://devcenter.heroku.com/articles/getting-started-with-go#introduction)
+  1. A working Go development environment (version 1.12) ([guide](https://golang.org/doc/install)).
+  1. Turn on go modules: `export GO111MODULE=on`
+  1. Read [Heroku's guide to deploying Go apps](https://devcenter.heroku.com/articles/getting-started-with-go#introduction)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
