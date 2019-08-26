@@ -1,4 +1,4 @@
-module starter-snake-go
+module github.com/battlesnakeio/starter-snake-go
 
 go 1.12
 

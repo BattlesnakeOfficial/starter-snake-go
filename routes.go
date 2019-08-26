@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"starter-snake-go/api"
+	"github.com/battlesnakeio/starter-snake-go/api"
 )
 
 func Index(res http.ResponseWriter, req *http.Request) {
