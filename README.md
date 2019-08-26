@@ -12,21 +12,28 @@ To get started, you'll need:
 
 ### Running the AI locally
 
-1) [Fork this repo](https://github.com/sendwithus/battlesnake-go/fork).
-
-2) Clone repo to your development environment:
+1. Clone repo to your development environment:
 ```
-git clone git@github.com:USERNAME/battlesnake-go.git $GOPATH/github.com/USERNAME/battlesnake-go
-cd $GOPATH/github.com/USERNAME/battlesnake-go
+git clone https://github.com/battlesnakeio/starter-snake-go.git $GOPATH/github.com/battlesnakeio/starter-snake-go
+cd $GOPATH/github.com/battlesnakeio/starter-snake-go
 ```
 
-3) Compile and run the server with:
+1. Compile and run the server with:
 
 ```
 make run
 ```
 
-4) Test the client in your browser: [http://127.0.0.1:9000/start](http://127.0.0.1:9000/start)
+1. Test the client in your browser: [http://127.0.0.1:9000/start](http://127.0.0.1:9000/start)
+
+### Fork this repo
+
+1. [Fork this repo](https://github.com/battlesnakeio/starter-snake-go/fork).
+
+1. Push and Pull from your new repo
+```
+git remote set-url origin https://github.com/<your-username>/starter-snake-go
+```
 
 ### Running tests locally
 
