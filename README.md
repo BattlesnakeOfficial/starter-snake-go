@@ -6,7 +6,7 @@ Visit [https://github.com/battlesnakeio/community/blob/master/starter-snakes.md]
 
 To get started, you'll need:
   1. A working Go development environment ([guide](https://golang.org/doc/install)).
-  2. Read [Heroku's guide to deploying Go apps](https://devcenter.heroku.com/articles/getting-started-with-go#introduction)
+  1. Read [Heroku's guide to deploying Go apps](https://devcenter.heroku.com/articles/getting-started-with-go#introduction)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
@@ -23,7 +23,7 @@ cd $GOPATH/github.com/USERNAME/battlesnake-go
 3) Compile and run the server with:
 
 ```
-Make run
+make run
 ```
 
 4) Test the client in your browser: [http://127.0.0.1:9000/start](http://127.0.0.1:9000/start)
@@ -31,7 +31,7 @@ Make run
 ### Running tests locally
 
 ```
-Make test
+make test
 ```
 
 Note: if you're missing any packages, use `Make get`.
