@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 type Coord struct {
@@ -102,7 +103,7 @@ func main() {
 	http.HandleFunc("/end", HandleEnd)
 
 	fmt.Printf("Starting Battlesnake Server at http://0.0.0.0:%s...\n", port)
-	log.Fatal(http.ListenAndServe(":"+8080, nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 // import (
