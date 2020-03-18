@@ -1,13 +1,9 @@
 {
-  "name": "battlesnake-go",
-  "description": "A simple BattleSnake AI written in Go..",
+  "name": "Golang Starter Snake",
+  "description": "A simple BattleSnake written in Go.",
+  "repository": "https://github.com/BattlesnakeOfficial/starter-snake-go",
+  "website": "https://play.battlesnake.com",
   "keywords": [
-    "battlesnake",
-    "sendwithus"
-  ],
-  "website": "http://battlesnake.io",
-  "repository": "https://github.com/sendwithus/battlesnake-go",
-  "env": {
-    "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go"
-  }
+    "battlesnake"
+  ]
 }
