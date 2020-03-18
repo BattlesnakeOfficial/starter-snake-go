@@ -72,6 +72,7 @@ func HandleStart(w http.ResponseWriter, r *http.Request) {
 		TailType: "regular",
 	}
 
+	fmt.Printf("START\n")
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
@@ -81,12 +82,14 @@ func HandleMove(w http.ResponseWriter, r *http.Request) {
 		Move: "right",
 	}
 
+	fmt.Printf("MOVE: %s\n", response.Move)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
 
 func HandleEnd(w http.ResponseWriter, r *http.Request) {
 	// Nothing to respond with here
+	fmt.Printf("END\n")
 }
 
 func main() {
