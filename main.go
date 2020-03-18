@@ -33,7 +33,10 @@ type Game struct {
 }
 
 type StartRequest struct {
-	// TODO
+	Game  Game  `json:"game"`
+	Turn  int   `json:"turn"`
+	Board Board `json:"board"`
+	You   Snake `json:"you"`
 }
 
 type StartResponse struct {
@@ -51,11 +54,14 @@ type MoveRequest struct {
 
 type MoveResponse struct {
 	Move  string `json:"move"`
-	Shout string `json:"shout, omitempty"`
+	Shout string `json:"shout,omitempty"`
 }
 
 type EndRequest struct {
-	// TODO
+	Game  Game  `json:"game"`
+	Turn  int   `json:"turn"`
+	Board Board `json:"board"`
+	You   Snake `json:"you"`
 }
 
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
