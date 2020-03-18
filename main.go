@@ -89,6 +89,11 @@ func HandleEnd(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	port := os.Getenv("PORT")
+	if len(port) == 0 {
+		port = "8080"
+	}
+
 	http.HandleFunc("/", HandleIndex)
 	http.HandleFunc("/ping", HandlePing)
 
@@ -96,9 +101,8 @@ func main() {
 	http.HandleFunc("/move", HandleMove)
 	http.HandleFunc("/end", HandleEnd)
 
-	port := ":8080"
-	fmt.Printf("Starting Battlesnake Server at http://0.0.0.0%s...\n", port)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	fmt.Printf("Starting Battlesnake Server at http://0.0.0.0:%s...\n", port)
+	log.Fatal(http.ListenAndServe(":"+8080, nil))
 }
 
 // import (
