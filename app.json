@@ -1,9 +1,0 @@
-{
-  "name": "Golang Starter Snake",
-  "description": "A simple BattleSnake written in Go.",
-  "repository": "https://github.com/BattlesnakeOfficial/starter-snake-go",
-  "website": "https://play.battlesnake.com",
-  "keywords": [
-    "battlesnake"
-  ]
-}
