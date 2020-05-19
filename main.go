@@ -9,47 +9,46 @@ import (
 	"os"
 )
 
+type Game struct {
+	ID      string `json:"id"`
+	Timeout int32  `json:"timeout"`
+}
+
 type Coord struct {
 	X int `json:"x"`
 	Y int `json:"y"`
 }
 
-type Snake struct {
+type Battlesnake struct {
 	ID     string  `json:"id"`
 	Name   string  `json:"name"`
-	Health int     `json:"health"`
+	Health int32   `json:"health"`
 	Body   []Coord `json:"body"`
+	Head   Coord   `json:"head"`
+	Length int32   `json:"length"`
+	Shout  string  `json:"shout"`
 }
 
 type Board struct {
-	Height int     `json:"height"`
-	Width  int     `json:"width"`
-	Food   []Coord `json:"food"`
-	Snakes []Snake `json:"snakes"`
+	Height int           `json:"height"`
+	Width  int           `json:"width"`
+	Food   []Coord       `json:"food"`
+	Snakes []Battlesnake `json:"snakes"`
 }
 
-type Game struct {
-	ID string `json:"id"`
+type BattlesnakeInfoResponse struct {
+	APIVersion string `json:"apiversion"`
+	Author     string `json:"author"`
+	Color      string `json:"color"`
+	Head       string `json:"head"`
+	Tail       string `json:"tail"`
 }
 
-type StartRequest struct {
-	Game  Game  `json:"game"`
-	Turn  int   `json:"turn"`
-	Board Board `json:"board"`
-	You   Snake `json:"you"`
-}
-
-type StartResponse struct {
-	Color    string `json:"color,omitempty"`
-	HeadType string `json:"headType,omitempty"`
-	TailType string `json:"tailType,omitempty"`
-}
-
-type MoveRequest struct {
-	Game  Game  `json:"game"`
-	Turn  int   `json:"turn"`
-	Board Board `json:"board"`
-	You   Snake `json:"you"`
+type GameRequest struct {
+	Game  Game        `json:"game"`
+	Turn  int         `json:"turn"`
+	Board Board       `json:"board"`
+	You   Battlesnake `json:"you"`
 }
 
 type MoveResponse struct {
@@ -57,45 +56,48 @@ type MoveResponse struct {
 	Shout string `json:"shout,omitempty"`
 }
 
-type EndRequest struct {
-	Game  Game  `json:"game"`
-	Turn  int   `json:"turn"`
-	Board Board `json:"board"`
-	You   Snake `json:"you"`
-}
-
+// HandleIndex is called when your Battlesnake is created and refreshed
+// by play.battlesnake.com. BattlesnakeInfoResponse contains information about
+// your Battlesnake, including what it should look like on the game board.
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Your Battlesnake is alive!")
-}
+	response := BattlesnakeInfoResponse{
+		APIVersion: "1",
+		Author:     "",        // TODO: Your Battlesnake username
+		Color:      "#008800", // TODO: Personalize
+		Head:       "tongue",  // TODO: Personalize
+		Tail:       "curled",  // TODO: Personalize
+	}
 
-func HandlePing(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "pong")
+	w.Header().Set("Content-Type", "application/json")
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // HandleStart is called at the start of each game your Battlesnake is playing.
 // The StartRequest object contains information about the game that's about to start.
 // TODO: Use this function to decide how your Battlesnake is going to look on the board.
 func HandleStart(w http.ResponseWriter, r *http.Request) {
-	request := StartRequest{}
-	json.NewDecoder(r.Body).Decode(&request)
-
-	response := StartResponse{
-		Color:    "#888888",
-		HeadType: "regular",
-		TailType: "regular",
+	request := GameRequest{}
+	err := json.NewDecoder(r.Body).Decode(&request)
+	if err != nil {
+		log.Fatal(err)
 	}
 
+	// Nothing to respond with here
 	fmt.Print("START\n")
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response)
 }
 
 // HandleMove is called for each turn of each game.
 // Valid responses are "up", "down", "left", or "right".
 // TODO: Use the information in the MoveRequest object to determine your next move.
 func HandleMove(w http.ResponseWriter, r *http.Request) {
-	request := MoveRequest{}
-	json.NewDecoder(r.Body).Decode(&request)
+	request := GameRequest{}
+	err := json.NewDecoder(r.Body).Decode(&request)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Choose a random direction to move in
 	possibleMoves := []string{"up", "down", "left", "right"}
@@ -107,14 +109,20 @@ func HandleMove(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Printf("MOVE: %s\n", response.Move)
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // HandleEnd is called when a game your Battlesnake was playing has ended.
 // It's purely for informational purposes, no response required.
 func HandleEnd(w http.ResponseWriter, r *http.Request) {
-	request := EndRequest{}
-	json.NewDecoder(r.Body).Decode(&request)
+	request := GameRequest{}
+	err := json.NewDecoder(r.Body).Decode(&request)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Nothing to respond with here
 	fmt.Print("END\n")
@@ -127,8 +135,6 @@ func main() {
 	}
 
 	http.HandleFunc("/", HandleIndex)
-	http.HandleFunc("/ping", HandlePing)
-
 	http.HandleFunc("/start", HandleStart)
 	http.HandleFunc("/move", HandleMove)
 	http.HandleFunc("/end", HandleEnd)
