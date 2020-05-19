@@ -63,9 +63,9 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	response := BattlesnakeInfoResponse{
 		APIVersion: "1",
 		Author:     "",        // TODO: Your Battlesnake username
-		Color:      "#008800", // TODO: Personalize
-		Head:       "tongue",  // TODO: Personalize
-		Tail:       "curled",  // TODO: Personalize
+		Color:      "#888888", // TODO: Personalize
+		Head:       "default", // TODO: Personalize
+		Tail:       "default", // TODO: Personalize
 	}
 
 	w.Header().Set("Content-Type", "application/json")

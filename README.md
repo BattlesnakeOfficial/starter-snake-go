@@ -1,6 +1,6 @@
 # A simple [Battlesnake](http://play.battlesnake.com) written in Go.
 
-This is a basic implementation of the [Battlesnake API](https://docs.battlesnake.com/snake-api). It's a great starting point for anyone wanting to program their first Battlesnake using Go. It comes ready to deploy to [Heroku](https://heroku.com), although you can use other cloud providers if you'd like.
+This is a basic implementation of the [Battlesnake API](https://docs.battlesnake.com/references/api). It's a great starting point for anyone wanting to program their first Battlesnake using Go. It comes ready to deploy to [Heroku](https://heroku.com), although you can use other cloud providers if you'd like.
 
 ### Technologies
 
@@ -39,7 +39,7 @@ This Battlesnake uses [Go 1.13](https://golang.org/) and [Heroku](https://heroku
     ```
     If everything was successful, you should see the following text:
     ```
-    Your Battlesnake is alive!
+    {"apiversion": "1", "author": "", "color": "#888888", "head": "default", "tail": "default"}
     ```
 
 6. Optionally, you can view your server logs using the [Heroku logs command](https://devcenter.heroku.com/articles/logging#log-retrieval) `heroku logs --tail`. The `--tail` option will show a live feed of your logs in real-time.
@@ -72,16 +72,18 @@ Now you're ready to start customizing your Battlesnake and improving its algorit
 
 ### Changing Appearance
 
-Locate the `HandleStart` function inside [main.go](main.go#L78). You should see a line that looks like this:
+Locate the `HandleIndex` function inside [main.go](main.go#L62). You should see a line that looks like this:
 ```go
-response := StartResponse{
-		Color:    "#888888",
-		HeadType: "regular",
-    TailType: "regular",
+response := BattlesnakeInfoResponse{
+    APIVersion: "1",
+    Author:     "",
+    Color:      "#888888",
+    Head:       "default",
+    Tail:       "default",
 }
 ```
 
-This function is called every time a new game starts. Your response determines what your Battlesnake will look like in that game. See [Customizing Your Battlesnake](https://docs.battlesnake.com/snake-customization) for how to customize your Battlesnake's appearance using these values.
+This function is called by the game engine to make sure your Battlesnake is healthy and responding correctly. Your response determines what your Battlesnake will look like in that game. See [Battlesnake Personalization](https://docs.battlesnake.com/references/personalization) for how to customize your Battlesnake's appearance using these values.
 
 ### Changing Behavior
 
@@ -96,7 +98,7 @@ move := possibleMoves[rand.Intn(len(possibleMoves))]
 
 Possible moves are "up", "down", "left", or "right". To start, your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `request` variable) and make an intelligent decision about where your Battlesnake should move next.
 
-See the [Battlesnake Rules](https://docs.battlesnake.com/rules) for more information on playing the game, moving around the board, and improving your algorithm.
+See the [Battlesnake Game Rules](https://docs.battlesnake.com/references/rules) for more information on playing the game, moving around the board, and improving your algorithm.
 
 ### Updating Your Battlesnake
 
@@ -121,7 +123,7 @@ Now you have everything you need to start making your Battlesnake super smart! H
 
 * You can use the Go [fmt.Printf(...)](https://golang.org/pkg/fmt/#Printf) function to output information to your server logs. This is very useful for debugging logic in your code during Battlesnake games.
 
-* Review the [Battlesnake API Docs](https://docs.battlesnake.com/snake-api) to learn what information is provided with each command.
+* Review the [Battlesnake API Docs](https://docs.battlesnake.com/references/api) to learn what information is provided with each command.
 
 * When viewing a Battlesnake game you can pause playback and step forward/backward one frame at a time. If you review your logs at the same time, you can see what decision your Battlesnake made on each turn.
 
