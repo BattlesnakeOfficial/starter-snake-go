@@ -89,14 +89,7 @@ This function is called by the game engine to make sure your Battlesnake is heal
 
 On every turn of each game your Battlesnake receives information about the game board and must decide its next move.
 
-Locate the `HandleMove` function inside [main.go](main.go#L96). You should see code that looks like this:
-```go
-// Choose a random direction to move in
-possibleMoves := []string{"up", "down", "left", "right"}
-move := possibleMoves[rand.Intn(len(possibleMoves))]
-```
-
-Possible moves are "up", "down", "left", or "right". To start, your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `request` variable) and make an intelligent decision about where your Battlesnake should move next.
+Locate the `HandleMove` function inside [main.go](main.go#L95). Possible moves are "up", "down", "left", or "right". To start, your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `request` variable) and make an intelligent decision about where your Battlesnake should move next.
 
 See the [Battlesnake Game Rules](https://docs.battlesnake.com/references/rules) for more information on playing the game, moving around the board, and improving your algorithm.
 
