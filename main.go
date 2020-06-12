@@ -76,7 +76,7 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleStart is called at the start of each game your Battlesnake is playing.
-// The StartRequest object contains information about the game that's about to start.
+// The GameRequest object contains information about the game that's about to start.
 // TODO: Use this function to decide how your Battlesnake is going to look on the board.
 func HandleStart(w http.ResponseWriter, r *http.Request) {
 	request := GameRequest{}
@@ -91,7 +91,7 @@ func HandleStart(w http.ResponseWriter, r *http.Request) {
 
 // HandleMove is called for each turn of each game.
 // Valid responses are "up", "down", "left", or "right".
-// TODO: Use the information in the MoveRequest object to determine your next move.
+// TODO: Use the information in the GameRequest object to determine your next move.
 func HandleMove(w http.ResponseWriter, r *http.Request) {
 	request := GameRequest{}
 	err := json.NewDecoder(r.Body).Decode(&request)
