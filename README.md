@@ -82,7 +82,7 @@ response := BattlesnakeInfoResponse{
 }
 ```
 
-This function is called by the game engine periodically to make sure your Battlesnake is healthy, responding correctly, and to determine how your Battlesnake will appear \on the game board. See [Battlesnake Personalization](https://docs.battlesnake.com/references/personalization) for how to customize your Battlesnake's appearance using these values.
+This function is called by the game engine periodically to make sure your Battlesnake is healthy, responding correctly, and to determine how your Battlesnake will appear on the game board. See [Battlesnake Personalization](https://docs.battlesnake.com/references/personalization) for how to customize your Battlesnake's appearance using these values.
 
 Whenever you update these values, you can refresh your Battlesnake on [your profile page](https://play.battlesnake.com/me/) to use your latest configuration. Your changes should be reflected in the UI, as well as any new games created.
 
@@ -90,7 +90,7 @@ Whenever you update these values, you can refresh your Battlesnake on [your prof
 
 On every turn of each game your Battlesnake receives information about the game board and must decide its next move.
 
-Locate the `move` function inside [main.go](main.go#L95). Possible moves are "up", "down", "left", or "right". To start your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `data` variable) and decide where your Battlesnake should move next.
+Locate the `HandleMove` function inside [main.go](main.go#L95). Possible moves are "up", "down", "left", or "right". To start your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `data` variable) and decide where your Battlesnake should move next.
 
 See the [Battlesnake Game Rules](https://docs.battlesnake.com/references/rules) for more information on playing the game, moving around the board, and improving your algorithm.
 
@@ -112,8 +112,8 @@ Now you have everything you need to start making your Battlesnake super smart!
 
 Here are some simple goals to help you develop your Battlesnake early on. Completing these will make your Battlesnake competitive against other Battlesnakes in multi-player games.
 
-- [ ] Avoid colliding with yourself
 - [ ] Avoid colliding with walls
+- [ ] Avoid colliding with yourself
 - [ ] Try to move towards food
 - [ ] Avoid colliding with other snakes
 
