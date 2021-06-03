@@ -87,6 +87,68 @@ func HandleStart(w http.ResponseWriter, r *http.Request) {
 
 	// Nothing to respond with here
 	fmt.Print("START\n")
+
+}
+
+func boarderCheck(you Battlesnake, gameState Board) []string{
+    if you.Head.X == 0{//left wall
+    	if you.Head.Y == 0{//accounting for the corners (bottom left
+			directions := []string{}
+			directions = append(directions, "up")
+			directions = append(directions, "right")
+			return directions
+		}
+		if you.Head.Y == gameState.Height{//top left corner
+			directions := []string{}
+			directions = append(directions, "down")
+			directions = append(directions, "right")
+			return directions
+		}
+    	directions := []string{}
+    	directions = append(directions, "up")
+		directions = append(directions, "right")
+		directions = append(directions, "down")
+    	return directions
+	}
+	if you.Head.X == gameState.Width{//right wall
+		if you.Head.Y == 0{//bottom right corner
+			directions := []string{}
+			directions = append(directions, "up")
+			directions = append(directions, "left")
+			return directions
+		}
+		if you.Head.Y == gameState.Height{//top right corner
+			directions := []string{}
+			directions = append(directions, "down")
+			directions = append(directions, "left")
+			return directions
+		}
+		directions := []string{}
+		directions = append(directions, "up")
+		directions = append(directions, "right")
+		directions = append(directions, "down")
+		return directions
+	}
+	if you.Head.Y == 0{//bottom wall
+		directions := []string{}
+		directions = append(directions, "up")
+		directions = append(directions, "left")
+		directions = append(directions, "right")
+		return directions
+	}
+	if you.Head.Y == gameState.Height{//top wall
+		directions := []string{}
+		directions = append(directions, "down")
+		directions = append(directions, "left")
+		directions = append(directions, "right")
+		return directions
+	}
+	directions := []string{}
+	directions = append(directions, "up")
+	directions = append(directions, "right")
+	directions = append(directions, "left")
+	directions = append(directions, "down")
+	return directions
 }
 
 // HandleMove is called for each turn of each game.
@@ -98,10 +160,11 @@ func HandleMove(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	var gameState Board = request.Board
+	var you Battlesnake = request.You
+	availableMoves := boarderCheck(you, gameState)
 
-	// Choose a random direction to move in
-	possibleMoves := []string{"up", "down", "left", "right"}
-	move := possibleMoves[rand.Intn(len(possibleMoves))]
+	move := availableMoves[rand.Intn(len(availableMoves))]
 
 	response := MoveResponse{
 		Move: move,
