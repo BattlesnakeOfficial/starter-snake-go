@@ -4,7 +4,7 @@ This is a basic implementation of the [Battlesnake API](https://docs.battlesnake
 
 ### Technologies
 
-* [Go 1.13](https://golang.org/)
+* [Go 1.13 (or later)](https://golang.org/)
 
 
 ## Prerequisites
@@ -66,15 +66,15 @@ Now you're ready to start customizing your Battlesnake's appearance and behavior
 
 ### Changing Appearance
 
-Locate the `HandleIndex` function inside [main.go](main.go#L62). Inside that function tou should see a line that looks like this:
+Locate the `info` function inside [logic.go](logic.go#L18). Inside that function you should see a line that looks like this:
 
 ```go
-response := BattlesnakeInfoResponse{
-    APIVersion: "1",
-    Author:     "",
-    Color:      "#888888",
-    Head:       "default",
-    Tail:       "default",
+return BattlesnakeInfoResponse{
+		APIVersion: "1",
+		Author:     "",        // TODO: Your Battlesnake username
+		Color:      "#888888", // TODO: Personalize
+		Head:       "default", // TODO: Personalize
+		Tail:       "default", // TODO: Personalize
 }
 ```
 
@@ -86,7 +86,7 @@ Whenever you update these values, you can refresh your Battlesnake on [your prof
 
 On every turn of each game your Battlesnake receives information about the game board and must decide its next move.
 
-Locate the `HandleMove` function inside [main.go](main.go#L95). Possible moves are "up", "down", "left", or "right". To start your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `data` variable) and decide where your Battlesnake should move next.
+Locate the `move` function inside [logic.go](logic.go#L45). Possible moves are "up", "down", "left", or "right". To start your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board and decide where your Battlesnake should move next.
 
 See the [Battlesnake Game Rules](https://docs.battlesnake.com/references/rules) for more information on playing the game, moving around the board, and improving your algorithm.
 
@@ -120,7 +120,7 @@ Once you have completed these steps you'll be ready to compete live against othe
 
 * Keeping your Repl open in a second window while games are running is helpful for watching server activity and debugging any problems with your Battlesnake.
 
-* You can use [fmt.Printf(...)](https://golang.org/pkg/fmt/#Printf) to output information to your server logs. This is very useful for debugging logic in your code during Battlesnake games.
+* You can use [log.Printf(...)](https://golang.org/pkg/log/#Printf) to output information to your server logs. This is very useful for debugging logic in your code during Battlesnake games.
 
 * Review the [Battlesnake API Docs](https://docs.battlesnake.com/references/api) to learn what information is provided with each command.
 
