@@ -2,7 +2,7 @@
 
 ![Battlesnake Logo](https://media.battlesnake.com/social/GitHubSocial.png)
 
-This is a basic implementation of the [Battlesnake API](https://docs.battlesnake.com/references/api). It's a great starting point for anyone wanting to program their first Battlesnake using Python. It comes ready to use with [Repl.it](https://repl.it) and [Heroku](https://heroku.com), or you can use any other cloud provider you'd like. 
+This is a basic implementation of the [Battlesnake API](https://docs.battlesnake.com/references/api). It's a great starting point for anyone wanting to program their first Battlesnake using Go. It comes ready to use with [Repl.it](https://repl.it) and [Heroku](https://heroku.com), or you can use any other cloud provider you'd like. 
 
 ## Technologies Used
 
@@ -41,7 +41,7 @@ Whenever you update these values, go to the page for your Battlesnake and select
 
 On every turn of each game your Battlesnake receives information about the game board and must decide its next move.
 
-Locate the `move` function inside [logic.go](logic.go#L45). Possible moves are "up", "down", "left", or "right". To start your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `data` variable) and decide where your Battlesnake should move next. Your Battlesnakes move logic lives in [server_logic.py](server_logic.py#L37). This is the code you will want to edit.
+Locate the `move` function inside [logic.go](logic.go#L45). Possible moves are "up", "down", "left", or "right". To start your Battlesnake will choose a move randomly. Your goal as a developer is to read information sent to you about the board (available in the `GameState` struct found in [main.go](main.go#L10)) and decide where your Battlesnake should move next. Your Battlesnakes move logic lives in [logic.go](logic.go#L45). This is the code you will want to edit.
 
 See the [Battlesnake Game Rules](https://docs.battlesnake.com/references/rules) for more information on playing the game, moving around the board, and improving your algorithm.
 
