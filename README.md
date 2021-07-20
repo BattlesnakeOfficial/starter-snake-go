@@ -58,7 +58,9 @@ go run main.go
 ## Running Tests
 
 This Starter Project comes with a very simple test suite for you to expand! Located in `logic_test.go` you can run them using the following command:
-```go run logic_test.go```
+```shell
+go test
+```
 
 ---
 
