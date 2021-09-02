@@ -1,6 +1,6 @@
 # Getting started with [Battlesnake](http://play.battlesnake.com?utm_source=github&utm_medium=readme&utm_campaign=go_starter&utm_content=homepage) and Go
 
-![Battlesnake Logo](https://media.battlesnake.com/social/GitHubSocial.png)
+![Battlesnake Logo](https://media.battlesnake.com/social/StarterSnakeGitHubRepos_Go.png)
 
 This is a basic implementation of the [Battlesnake API](https://docs.battlesnake.com/references/api) in Go. It's a great starting point for anyone wanting to program their first Battlesnake using Go, and comes ready to deploy with [Replit](https://repl.it) and [Heroku](https://heroku.com), or you can use any other cloud provider you'd like. 
 
