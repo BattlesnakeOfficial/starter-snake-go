@@ -21,8 +21,28 @@ type Game struct {
 }
 
 type Ruleset struct {
-	Name    string `json:"name"`
-	Version string `json:"version"`
+	Name     string   `json:"name"`
+	Version  string   `json:"version"`
+	Settings Settings `json:"settings"`
+}
+
+type Settings struct {
+	FoodSpawnChance     int32  `json:"foodSpawnChance"`
+	MinimumFood         int32  `json:"minimumFood"`
+	HazardDamagePerTurn int32  `json:"hazardDamagePerTurn"`
+	Royale              Royale `json:"royale"`
+	Squad               Squad  `json:"squad"`
+}
+
+type Royale struct {
+	ShrinkEveryNTurns int32 `json:"shrinkEveryNTurns"`
+}
+
+type Squad struct {
+	AllowBodyCollisions bool `json:"allowBodyCollisions"`
+	SharedElimination   bool `json:"sharedElimination"`
+	SharedHealth        bool `json:"sharedHealth"`
+	SharedLength        bool `json:"sharedLength"`
 }
 
 type Board struct {
