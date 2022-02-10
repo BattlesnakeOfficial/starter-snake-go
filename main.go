@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+const ServerID = "BattlesnakeOfficial/starter-snake-go"
+
 type GameState struct {
 	Game  Game        `json:"game"`
 	Turn  int         `json:"turn"`
@@ -145,6 +147,15 @@ func HandleEnd(w http.ResponseWriter, r *http.Request) {
 	// Nothing to respond with here
 }
 
+// Middleware
+
+func withServerID(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Server", ServerID)
+		next(w, r)
+	}
+}
+
 // Main Entrypoint
 
 func main() {
@@ -153,10 +164,10 @@ func main() {
 		port = "8080"
 	}
 
-	http.HandleFunc("/", HandleIndex)
-	http.HandleFunc("/start", HandleStart)
-	http.HandleFunc("/move", HandleMove)
-	http.HandleFunc("/end", HandleEnd)
+	http.HandleFunc("/", withServerID(HandleIndex))
+	http.HandleFunc("/start", withServerID(HandleStart))
+	http.HandleFunc("/move", withServerID(HandleMove))
+	http.HandleFunc("/end", withServerID(HandleEnd))
 
 	log.Printf("Starting Battlesnake Server at http://0.0.0.0:%s...\n", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
