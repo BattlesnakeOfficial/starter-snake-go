@@ -50,7 +50,7 @@ See the [Battlesnake Game Rules](https://docs.battlesnake.com/references/rules) 
 Eventually you might want to run your Battlesnake server locally for faster testing and debugging. You can do this by installing [Go 1.13](https://golang.org/dl/) and running:
 
 ```shell
-go run main.go
+go run main.go logic.go
 ```
 
 **Note:** You cannot create games on [play.battlesnake.com](https://play.battlesnake.com) using a locally running Battlesnake unless you install and use a port forwarding tool like [ngrok](https://ngrok.com/). See [Hosting Suggestions.](https://docs.battlesnake.com/references/hosting-suggestions#local)
