@@ -10,7 +10,7 @@ This project is a great starting point for anyone wanting to program their first
 
 ## Technologies Used
 
-This project uses [Go 1.16](https://go.dev/). It also comes with an optional [Dockerfile](https://docs.docker.com/engine/reference/builder/) to help with deployment.
+This project uses [Go](https://go.dev/). It also comes with an optional [Dockerfile](https://docs.docker.com/engine/reference/builder/) to help with deployment.
 
 ## Run Your Battlesnake
 
