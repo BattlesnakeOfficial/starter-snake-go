@@ -6,7 +6,7 @@ package main
 //  |    |  _/\__  \\   __\   __\  | _/ __ \ /  ___//    \\__  \ |  |/ // __ \
 //  |    |   \ / __ \|  |  |  | |  |_\  ___/ \___ \|   |  \/ __ \|    <\  ___/
 //  |________/(______/__|  |__| |____/\_____>______>___|__(______/__|__\\_____>
-// 
+//
 // This file can be a nice home for your Battlesnake logic and helper functions.
 //
 // To get you started we've included code to prevent your Battlesnake from moving backwards.
@@ -46,7 +46,7 @@ func end(state GameState) {
 // Valid moves are "up", "down", "left", or "right"
 // See https://docs.battlesnake.com/api/example-move for available data
 func move(state GameState) BattlesnakeMoveResponse {
-    
+
 	isMoveSafe := map[string]bool{
 		"up":    true,
 		"down":  true,
@@ -55,18 +55,18 @@ func move(state GameState) BattlesnakeMoveResponse {
 	}
 
 	// We've included code to prevent your Battlesnake from moving backwards
-	myHead := state.You.Body[0]     // Coordinates of your head
-	myNeck := state.You.Body[1]     // Coordinates of your "neck"
-    
-	if myNeck.X < myHead.X {        // Neck is left of head, don't move left 
+	myHead := state.You.Body[0] // Coordinates of your head
+	myNeck := state.You.Body[1] // Coordinates of your "neck"
+
+	if myNeck.X < myHead.X { // Neck is left of head, don't move left
 		isMoveSafe["left"] = false
-        
+
 	} else if myNeck.X > myHead.X { // Neck is right of head, don't move right
 		isMoveSafe["right"] = false
-        
+
 	} else if myNeck.Y < myHead.Y { // Neck is below head, don't move down
 		isMoveSafe["down"] = false
-        
+
 	} else if myNeck.Y > myHead.Y { // Neck is above head, don't move up
 		isMoveSafe["up"] = false
 	}
@@ -79,9 +79,9 @@ func move(state GameState) BattlesnakeMoveResponse {
 	// mybody := state.You.Body
 
 	// TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
-    // opponents := state.Board.Snakes
+	// opponents := state.Board.Snakes
 
-    // Are there any safe moves left?
+	// Are there any safe moves left?
 	safeMoves := []string{}
 	for move, isSafe := range isMoveSafe {
 		if isSafe {
@@ -91,19 +91,19 @@ func move(state GameState) BattlesnakeMoveResponse {
 
 	if len(safeMoves) == 0 {
 		log.Printf("MOVE %d: No safe moves detected! Moving down\n", state.Turn)
-        return BattlesnakeMoveResponse{Move: "down"}
-    }
+		return BattlesnakeMoveResponse{Move: "down"}
+	}
 
-    // Choose a random move from the safe ones
-    nextMove := safeMoves[rand.Intn(len(safeMoves))]
-    
-    // TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
+	// Choose a random move from the safe ones
+	nextMove := safeMoves[rand.Intn(len(safeMoves))]
+
+	// TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
 	// food := state.Board.Food
 
-    log.Printf("MOVE %d: %s\n", state.Turn, nextMove)
-    return BattlesnakeMoveResponse{Move: nextMove}
+	log.Printf("MOVE %d: %s\n", state.Turn, nextMove)
+	return BattlesnakeMoveResponse{Move: nextMove}
 }
 
 func main() {
-    RunServer()
+	RunServer()
 }
