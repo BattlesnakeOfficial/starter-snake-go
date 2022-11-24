@@ -1,9 +1,14 @@
-FROM golang:1.18
+FROM golang:1.18 as build
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY go.mod ./
 RUN go mod download && go mod verify
-RUN go build -v -o /usr/local/bin/app ./...
 
-CMD ["app"]
+COPY . .
+RUN go build -v -o /usr/local/bin/battlesnake ./...
+
+FROM ubuntu
+COPY --from=build /usr/local/bin/battlesnake /bin/
+USER 65534
+CMD ["battlesnake"]
